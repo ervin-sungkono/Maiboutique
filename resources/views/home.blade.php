@@ -15,6 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <br>
+                    {{ __('Welcome back, ' . $user->username)}}
+                    <br>
+                    {{$user->role}}
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 /*
@@ -14,10 +15,32 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('template');
+Route::prefix('admin')->namespace('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+    // all admin related function goes here
+    //GET
+
+    //POST
+
+    //PATCH
+
+    //DELETE
+
 });
 
-Auth::routes();
+Route::namespace('member')->middleware('auth')->group(function () {
+    // all member related function goes here
+    //GET
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    //POST
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+    //PATCH
+
+    //DELETE
+    
+});
+
+Route::get('/', function () {
+    return view('welcome');
+})->middleware('guest');
+
+Auth::routes();
