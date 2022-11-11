@@ -13,6 +13,15 @@ class ProductController extends Controller
         return view('home', compact('products'));
     }
 
+    public function search($query){
+
+    }
+
+    public function viewDetail($id){
+        $product = Product::findOrFail($id);
+        return view('product.detail', compact('product'));
+    }
+
     public function store(Request $request){
 
     }
@@ -22,6 +31,6 @@ class ProductController extends Controller
     }
 
     public function delete($id){
-        
+
     }
 }
