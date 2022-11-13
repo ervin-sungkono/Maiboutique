@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'member@example.com',
             'role' => 'member'
         ]);
-        \App\Models\Product::factory(1000)->create();
+        // ProductFactory doesn't work for images because faker has a problem on saving it to local storage.
+        \App\Models\Product::factory(10)->create();
     }
 }

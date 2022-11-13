@@ -24,11 +24,11 @@ class isAdmin
                 return $next($request);
 
             }else{
-                return redirect('/home', with('message', 'Accesss to admin role is denied, authorization required.'));
+                return redirect('/home');
             }
 
         }else{
-            return redirect('/login', with('message', 'Please login first.'));
+            return redirect('/login');
         }
     }
 }

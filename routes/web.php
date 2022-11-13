@@ -7,23 +7,23 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::prefix('admin')->namespace('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     // all admin related function goes here
     //GET
-
+    Route::get('/product', [ProductController::class, 'showForm'])->name('product.form');
     //POST
-
+    Route::post('/product', [ProductController::class, 'store'])->name('product.create');
     //PATCH
 
     //DELETE
-
+    Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
 
 Route::middleware('auth')->group(function () {
     // all member related function goes here
     //GET
     Route::get('/home', [ProductController::class, 'index'])->name('home');
-    Route::get('/detail/{id}', [ProductController::class, 'viewDetail'])->name('product.detail');
+    Route::get('/product/{id}', [ProductController::class, 'viewDetail'])->name('product.detail');
     //POST
 
     //PATCH
