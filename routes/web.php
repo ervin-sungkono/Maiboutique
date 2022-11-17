@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -24,12 +25,14 @@ Route::middleware('auth')->group(function () {
     //GET
     Route::get('/home', [ProductController::class, 'index'])->name('home');
     Route::get('/product/{id}', [ProductController::class, 'viewDetail'])->name('product.detail');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.detail');
+    Route::get('/search', [ProductController::class, 'search'])->name('search');
     //POST
-
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
     //PATCH
-
+    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     //DELETE
-
+    Route::post('/cart/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
 Route::middleware('guest')->group(function () {

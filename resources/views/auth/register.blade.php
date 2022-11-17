@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Register')
+@section('title', 'Maiboutique | Register')
 
 @section('content')
 <div class="container">

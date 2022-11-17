@@ -85,6 +85,11 @@
                             </div>
                         </div>
                     </form>
+                    @if (session('status'))
+                        <div class="alert alert-primary mt-4">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

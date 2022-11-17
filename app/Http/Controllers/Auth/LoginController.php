@@ -19,7 +19,7 @@ class LoginController extends Controller
         $remember = $request->remember;
         if (Auth::attempt($credentials, $remember)) {
             request()->session()->regenerate();
-            return redirect('home');
+            return redirect()->route('home');
         }
 
         return back()->withErrors([
@@ -31,6 +31,6 @@ class LoginController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

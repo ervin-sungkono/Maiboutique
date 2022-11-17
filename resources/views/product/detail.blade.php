@@ -16,20 +16,26 @@
             <div class="d-flex align-items-end my-3 w-100 gap-3">
                 @auth
                     @if (Auth::user()->role === 'member')
-                    <form method="POST" action="{{ route('login') }}" class="col-8">
+                    <form method="POST" action="{{ route('cart.create') }}" class="col-8">
                         @csrf
                         <div class="col">
                             <label for="quantity" class="form-label">{{ __('Quantity:') }}</label>
                             <div class="col-md-6 w-100">
-                                <div class="input-group w-100">
-                                    <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" autofocus>
-                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                  </div>
+                                <input type="hidden" value="{{ $product->id }}" name="product_id">
                                 @error('quantity')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                @if (session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                <div class="input-group w-100">
+                                    <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" autofocus>
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </div>
                             </div>
                         </div>
                     </form>

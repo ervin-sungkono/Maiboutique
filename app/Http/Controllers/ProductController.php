@@ -19,7 +19,8 @@ class ProductController extends Controller
         return view('product.create');
     }
 
-    public function search($text){
+    public function search(Request $request){
+        $text = $request->query('text');
         $products = Product::where('name','LIKE',"%{$text}%")->paginate(8);
         return view('search', compact('products'));
     }
@@ -44,7 +45,7 @@ class ProductController extends Controller
             'description' => $validated['description'],
             'stock' => $validated['stock']
         ]);
-        return redirect('home');
+        return redirect()->route('product.create')->with('status', $product ? 'Product added successfully!' : 'Fail to add product!');
     }
 
     public function delete($id){
@@ -54,6 +55,6 @@ class ProductController extends Controller
             $product->delete();
         }
 
-        return redirect('home');
+        return redirect()->route('home');
     }
 }
