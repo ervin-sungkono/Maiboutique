@@ -24,11 +24,11 @@ class isAdmin
                 return $next($request);
 
             }else{
-                return redirect('/home');
+                return redirect()->route('home')->with('fail', 'Not authorized, please check your credentials');
             }
 
         }else{
-            return redirect('/login');
+            return redirect()->route('login')->with('fail', 'Please login first');
         }
     }
 }

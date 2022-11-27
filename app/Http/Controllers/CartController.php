@@ -33,10 +33,18 @@ class CartController extends Controller
     }
 
     public function showCart(){
-        $carts = Cart::where('user_id', '=', Auth::user()->id)
-                ->get();
+        $carts = Auth::user()->carts;
+        return view('cart.index', compact('carts'));
+    }
 
-        return view('cart', compact('carts'));
+    public function showForm($id){
+        $cart = Cart::findOrFail($id);
+
+        if($cart->user_id != Auth::user()->id){
+            return redirect()->route('home')->with('fail','Not authorized to edit this cart');
+        }
+
+        return view('cart.edit', compact('cart'));
     }
 
     public function update($id, CartRequest $request){
@@ -46,16 +54,13 @@ class CartController extends Controller
             'quantity' => $validated['quantity'],
         ]);
 
-        return redirect()->route('cart.detail');
+        return redirect()->route('cart.detail')->with('success', 'Cart successfully updated!');
     }
 
     public function delete($id){
         $cart = Cart::findOrFail($id);
+        $cart->delete();
 
-        if($cart){
-            $cart->delete();
-        }
-
-        return redirect()->route('cart.detail');
+        return redirect()->route('cart.detail')->with('success', 'Cart successfully deleted!');
     }
 }

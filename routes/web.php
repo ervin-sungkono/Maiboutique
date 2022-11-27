@@ -8,7 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () {
     // all admin related function goes here
     //GET
     Route::get('/product', [ProductController::class, 'showForm'])->name('product.form');
@@ -26,13 +26,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [ProductController::class, 'index'])->name('home');
     Route::get('/product/{id}', [ProductController::class, 'viewDetail'])->name('product.detail');
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.detail');
+    Route::get('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
     Route::get('/search', [ProductController::class, 'search'])->name('search');
     //POST
     Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
     //PATCH
     Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     //DELETE
-    Route::post('/cart/{id}', [CartController::class, 'delete'])->name('cart.delete');
+    Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
 Route::middleware('guest')->group(function () {
