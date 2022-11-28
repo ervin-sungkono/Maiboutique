@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\TransactionController;
 
 Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () {
     // all admin related function goes here
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [ProductController::class, 'search'])->name('search');
     //POST
     Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
+    Route::post('/checkout',[TransactionController::class, 'store'])->name('transaction.create');
     //PATCH
     Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     //DELETE

@@ -4,11 +4,15 @@
 
 @section('content')
 <div class="container d-flex gap-4">
-    <img src="{{asset('storage/'.$product->imageUrl)}}" alt="Product Image" class="rounded" style="width: max(33%, 240px); aspect-ratio: 16 / 10; object-fit: cover;">
+    @if(file_exists(public_path().'\storage/'.$product->imageUrl))
+        <img src="{{asset('storage/'.$product->imageUrl)}}" class="card-img-top" alt="..." style="aspect-ratio: 16 / 10; object-fit: cover">
+    @else
+        <img src="{{$product->imageUrl}}" class="card-img-top" alt="..." style="aspect-ratio: 16 / 10; object-fit: cover">
+    @endif
     <div class="card flex-grow-1">
         <div class="card-body">
             <h2 class="fw-bold">{{$product->name}}</h2>
-            <p class="fs-5">Rp. {{number_format($product->price, 0, ',', '.')}}</p>
+            <p class="fs-5">Rp {{number_format($product->price, 0, ',', '.')}}</p>
             <div class="description">
                 <h5 class="fw-bold">Description:</h5>
                 <p class="card-text">{{$product->description}}</p>

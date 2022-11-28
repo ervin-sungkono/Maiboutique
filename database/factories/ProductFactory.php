@@ -15,7 +15,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(3),
-            'imageUrl' => 'images/dummy.png',
+            'imageUrl' => 'https://picsum.photos/seed/'.$this->faker->unique()->word.'/480/320/',
             'price' => ($this->faker->numberBetween(10,200) * 1000),
             'description' => $this->faker->text(),
             'stock' => $this->faker->numberBetween(1,10),

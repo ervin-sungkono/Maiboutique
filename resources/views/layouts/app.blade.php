@@ -70,25 +70,26 @@
                 </div>
             </div>
         </nav>
-        @if(session('fail'))
-            <div class="container py-2">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{session('fail')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-        @endif
-        @if(session('success'))
-            <div class="container py-2">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{session('success')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-        @endif
         <main class="py-4">
+            @if(session('fail'))
+                <div class="container py-2">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{session('fail')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+            @if(session('success'))
+                <div class="container py-2">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{session('success')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>
+    @yield('script')
 </body>
 </html>

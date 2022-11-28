@@ -20,9 +20,9 @@ class ProductController extends Controller
     }
 
     public function search(Request $request){
-        $text = $request->query('text');
+        $text = $request->q;
         $products = Product::where('name','LIKE',"%{$text}%")->paginate(8);
-        return view('search', compact('products'));
+        return view('search', compact('products'))->with('q', $request->q);
     }
 
     public function viewDetail($id){
@@ -50,11 +50,10 @@ class ProductController extends Controller
 
     public function delete($id){
         $product = Product::findOrFail($id);
+        
+        Storage::disk('public')->delete($product->imageUrl);
+        $product->delete();
 
-        if(Storage::disk('public')->delete($product->imageUrl)){
-            $product->delete();
-        }
-
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success','Product deleted successfully!');
     }
 }
