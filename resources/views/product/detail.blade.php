@@ -5,9 +5,9 @@
 @section('content')
 <div class="container d-flex gap-4">
     @if(file_exists(public_path().'\storage/'.$product->imageUrl))
-        <img src="{{asset('storage/'.$product->imageUrl)}}" class="card-img-top" alt="..." style="aspect-ratio: 16 / 10; object-fit: cover">
+        <img src="{{asset('storage/'.$product->imageUrl)}}" class="rounded" style="width: max(33%, 240px); aspect-ratio: 16 / 10; object-fit: cover;">
     @else
-        <img src="{{$product->imageUrl}}" class="card-img-top" alt="..." style="aspect-ratio: 16 / 10; object-fit: cover">
+        <img src="{{$product->imageUrl}}" class="rounded" style="width: max(33%, 240px); aspect-ratio: 16 / 10; object-fit: cover;">
     @endif
     <div class="card flex-grow-1">
         <div class="card-body">
