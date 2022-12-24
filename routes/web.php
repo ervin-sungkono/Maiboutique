@@ -9,14 +9,12 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TransactionController;
 
-Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () {
+Route::prefix('admin')->middleware(['isAdmin'])->group(function () {
     // all admin related function goes here
     //GET
     Route::get('/product', [ProductController::class, 'showForm'])->name('product.form');
     //POST
     Route::post('/product', [ProductController::class, 'store'])->name('product.create');
-    //PATCH
-
     //DELETE
     Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
