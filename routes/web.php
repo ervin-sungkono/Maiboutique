@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.detail');
     Route::get('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
     Route::get('/search', [ProductController::class, 'search'])->name('search');
+    Route::get('/history', [TransactionController::class, 'getTransaction']);
     //POST
     Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
     Route::post('/checkout',[TransactionController::class, 'store'])->name('transaction.create');
@@ -40,9 +41,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('guest')->group(function () {
     // GET
-    Route::get('/', function () { return view('welcome'); });
+    Route::get('/', function () { return view('welcome'); })->name('welcome');
     Route::get('/login', [LoginController::class, 'index']);
     Route::get('/register', [RegisterController::class, 'index']);
+
     // POST
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
     Route::post('/register', [RegisterController::class, 'store'])->name('register');

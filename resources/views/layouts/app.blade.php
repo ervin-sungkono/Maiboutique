@@ -29,22 +29,49 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                       @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('home')}}">{{__('Home')}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('search')}}">{{__('Search')}}</a>
+                        </li>
+                           @if (Auth::user()->role == 'member')
+                               <li class="nav-item">
+                                  <a class="nav-link" href="{{route('cart.detail')}}">{{__('Cart')}}</a>
+                               </li>
+                               <li class="nav-item">
+                                  <a class="nav-link" href="/history">{{__('History')}}</a>
+                               </li>
+                           @endif
+                            {{-- profile --}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="">{{__('Profile')}}</a>
+                            </li>
+                       @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        @auth
+                            @if (Auth::user()->role == 'admin')
+                                <a href="{{route('product.form')}}" class="btn btn-outline-primary">
+                                    Add Item
+                                </a>
+                            @endif
+                        @endauth
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="btn btn-outline-primary ms-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -70,7 +97,7 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4">
+        <main class="py-4" @if(Route::currentRouteName()=='welcome') style="background-image: url({{asset('images/background_welcome.png')}})" @endif>
             @if(session('fail'))
                 <div class="container py-2">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">

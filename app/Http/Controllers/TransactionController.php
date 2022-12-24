@@ -23,4 +23,9 @@ class TransactionController extends Controller
         }
         return redirect()->route('cart.detail')->with('success','Checkout successful!');
     }
+
+    public function getTransaction(){
+        $transactions = Auth::user()->transactions;
+        return view('transaction.history', compact('transactions'));
+    }
 }
