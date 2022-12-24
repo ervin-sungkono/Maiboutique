@@ -9,15 +9,9 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'product_id', 'quantity'];
+    protected $fillable = ['user_id'];
 
-    protected $appends = ['total_price'];
-
-    public function product(){
-        return $this->hasOne(Product::class, 'id', 'product_id')->withTrashed();
-    }
-
-    public function getTotalPriceAttribute(){
-        return $this->product->price * $this->quantity;
+    public function details(){
+        return $this->hasMany(TransactionDetail::class);
     }
 }

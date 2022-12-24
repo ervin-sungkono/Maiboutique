@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="container">
-        <div class="d-flex gap-3 justify-content-center py-3">
+        <div class="d-flex flex-wrap gap-3 justify-content-center py-3">
             @foreach ($carts as $cart)
                 @if($cart->product)
-                    <div class="card col-6">
+                    <div class="card col-5">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 @if(file_exists(public_path().'\storage/'.$cart->product->imageUrl))
@@ -22,7 +22,10 @@
                                 <p class="card-text mb-0">Rp {{number_format($cart->product->price, 0, ',', '.')}}</p>
                                 <p class="card-text">Qty: {{$cart->quantity}}</p>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <a href="{{route('cart.form', ['id' => $cart->id])}}" class="btn btn-warning flex-grow-1">Ubah</a>
+                                    <form action="{{route('cart.form', ['id' => $cart->id])}}" class="flex-grow-1">
+                                        @csrf
+                                        <button type="submit" class="btn btn-warning w-100">Ubah</button>
+                                    </form>
                                     <form action="{{route('cart.delete', ['id'=> $cart->id])}}" method="POST" class="flex-grow-1">
                                         @method('DELETE')
                                         @csrf

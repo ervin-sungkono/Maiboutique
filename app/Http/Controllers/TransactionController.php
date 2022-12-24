@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 
 class TransactionController extends Controller
 {
     public function store(){
-        foreach(Auth::user()->carts as $cart){
-            $transaction = Transaction::create([
-                'user_id' => $cart->user_id,
+        $transaction = Transaction::create([
+            'user_id' => Auth::user()->id
+        ]);
+        $carts = Auth::user()->cart->details;
+        foreach($carts as $cart){
+            $transDetail = TransactionDetail::create([
+                'transaction_id' => $transaction->id,
                 'product_id' => $cart->product_id,
                 'quantity' => $cart->quantity,
             ]);
-            if(!$transaction){
+            if(!$transDetail){
+                $transaction->delete();
                 return redirect()->route('cart.detail')->with('fail','Fail to checkout');
             }else{
                 $cart->delete();

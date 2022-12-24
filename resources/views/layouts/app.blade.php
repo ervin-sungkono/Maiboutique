@@ -14,6 +14,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('style')
 </head>
 <body>
     <div id="app">
@@ -97,7 +98,7 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4" @if(Route::currentRouteName()=='welcome') style="background-image: url({{asset('images/background_welcome.png')}})" @endif>
+        <main class="py-4" @yield('inline-style')>
             @if(session('fail'))
                 <div class="container py-2">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
