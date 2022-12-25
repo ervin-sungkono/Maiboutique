@@ -25,11 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [ProductController::class, 'index'])->name('home');
     Route::get('/product/{id}', [ProductController::class, 'viewDetail'])->name('product.detail');
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.detail');
+    Route::get('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
     Route::get('/search', [ProductController::class, 'search'])->name('search');
     Route::get('/history', [TransactionController::class, 'getTransaction']);
     //POST
     Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
-    Route::post('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
     Route::post('/checkout',[TransactionController::class, 'store'])->name('transaction.create');
     //PATCH
     Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');

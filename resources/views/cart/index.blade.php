@@ -22,10 +22,7 @@
                                 <p class="card-text mb-0">Rp {{number_format($cart->product->price, 0, ',', '.')}}</p>
                                 <p class="card-text">Qty: {{$cart->quantity}}</p>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <form action="{{route('cart.form', ['id' => $cart->id])}}" class="flex-grow-1">
-                                        @csrf
-                                        <button type="submit" class="btn btn-warning w-100">Ubah</button>
-                                    </form>
+                                    <a href="{{route('cart.form', ['id' => $cart->id])}}" class="btn btn-warning flex-grow-1">Ubah</a>
                                     <form action="{{route('cart.delete', ['id'=> $cart->id])}}" method="POST" class="flex-grow-1">
                                         @method('DELETE')
                                         @csrf
