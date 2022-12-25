@@ -14,6 +14,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     @yield('style')
 </head>
 <body>
@@ -47,7 +49,7 @@
                            @endif
                             {{-- profile --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="">{{__('Profile')}}</a>
+                                <a class="nav-link" href="{{route('profile')}}">{{__('Profile')}}</a>
                             </li>
                        @endauth
                     </ul>

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\TransactionController;
 
 Route::prefix('admin')->middleware(['isAdmin'])->group(function () {
@@ -28,11 +29,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
     Route::get('/search', [ProductController::class, 'search'])->name('search');
     Route::get('/history', [TransactionController::class, 'getTransaction']);
+    Route::get('/profile', [ProfileController::class, 'checkProfile'])->name('profile');
+    Route::get('/profile/update', [ProfileController::class, 'update'])->name('profile.form');
+    Route::get('/password/update', [ProfileController::class, 'updatePass'])->name('password.form');
+
     //POST
     Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
     Route::post('/checkout',[TransactionController::class, 'store'])->name('transaction.create');
     //PATCH
     Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update');
     //DELETE
     Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
