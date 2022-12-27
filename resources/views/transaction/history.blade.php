@@ -21,7 +21,6 @@
                 </div>
             @endforeach
             </div>
-
     @else
         <p class="d-flex text-muted fs-1 justify-content-center w-100">You have not buy anything yet!</p>
     @endif

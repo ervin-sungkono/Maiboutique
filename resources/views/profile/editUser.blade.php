@@ -10,9 +10,8 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                {{-- <input type="text" value="{{$user->username}}" class="form-control" name="username"> --}}
                 <div class="col">
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="name" autofocus>
+                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{$user->username}}">
                     @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -22,9 +21,8 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                {{-- <input type="email" value="{{$user->email}}" class="form-control" name="email"> --}}
                 <div class="col">
-                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('email') }}" autocomplete="email" autofocus>
+                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email}}">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -34,9 +32,8 @@
             </div>
             <div class="mb-3">
                 <label for="phone_number" class="form-label">Phone Number</label>
-                {{-- <input type="text" value="{{$user->phone_number}}" class="form-control" name="phone_number"> --}}
                 <div class="col">
-                    <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" autocomplete="tel" autofocus>
+                    <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{$user->phone_number}}">
                     @error('phone_number')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -46,9 +43,8 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                {{-- <input type="text" value="{{$user->address}}" class="form-control" name="address"> --}}
                 <div class="col">
-                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" autocomplete="street-address" autofocus>
+                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{$user->address}}">
                     @error('address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
