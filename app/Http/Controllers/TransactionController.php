@@ -27,7 +27,7 @@ class TransactionController extends Controller
                 $cart->delete();
             }
         }
-        return redirect()->route('cart.detail')->with('success','Checkout successful!');
+        return redirect()->route('transaction.history')->with('success','Checkout successful!');
     }
 
     public function getTransaction(){

@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\TransactionController;
 
-Route::prefix('admin')->middleware(['isAdmin'])->group(function () {
+Route::prefix('admin')->middleware('isAdmin')->group(function () {
     // all admin related function goes here
     //GET
     Route::get('/product', [ProductController::class, 'showForm'])->name('product.form');
@@ -20,28 +20,34 @@ Route::prefix('admin')->middleware(['isAdmin'])->group(function () {
     Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('isUser')->group(function () {
     // all member related function goes here
+    // GET
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.detail');
+    Route::get('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
+    Route::get('/history', [TransactionController::class, 'getTransaction'])->name('transaction.history');
+    // POST
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
+    // PATCH
+    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    // DELETE
+    Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart.delete');
+});
+
+Route::middleware('auth')->group(function () {
+    // all authenticated user related function goes here
     //GET
     Route::get('/home', [ProductController::class, 'index'])->name('home');
     Route::get('/product/{id}', [ProductController::class, 'viewDetail'])->name('product.detail');
-    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.detail');
-    Route::get('/cart/{id}', [CartController::class, 'showForm'])->name('cart.form');
     Route::get('/search', [ProductController::class, 'search'])->name('search');
-    Route::get('/history', [TransactionController::class, 'getTransaction']);
     Route::get('/profile', [ProfileController::class, 'checkProfile'])->name('profile');
     Route::get('/profile/update', [ProfileController::class, 'update'])->name('profile.form');
     Route::get('/password/update', [ProfileController::class, 'updatePass'])->name('password.form');
-
     //POST
-    Route::post('/cart', [CartController::class, 'store'])->name('cart.create');
     Route::post('/checkout',[TransactionController::class, 'store'])->name('transaction.create');
     //PATCH
-    Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/password/update', [ProfileController::class, 'updatePassword'])->name('password.update');
-    //DELETE
-    Route::delete('/cart/{id}', [CartController::class, 'delete'])->name('cart.delete');
 });
 
 Route::middleware('guest')->group(function () {
