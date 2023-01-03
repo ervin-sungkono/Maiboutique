@@ -25,8 +25,8 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'bail|required|string|unique:products|between:5,20',
-            'image' => 'required',
-            'image.*' => 'file|mimes:jpg,png,jpeg',
+            'image' => 'required|file|mimes:jpg,png,jpeg',
+            // 'image.*' => 'file|mimes:jpg,png,jpeg',
             'price' => 'bail|required|integer|gte:1000',
             'description' => 'bail|required|string|min:5',
             'stock' => 'bail|required|integer|gte:1',
