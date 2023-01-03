@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         $file = $request->file('image');
         $name = $file->getClientOriginalName();
-        $filename = now()->timestamp.'_'.$name;
+        $filename = now()->timestamp.'_'.str_replace(" ","",$name);
 
         $imageUrl = Storage::disk('public')->putFileAs('images', $file, $filename);
         $product = Product::create([
