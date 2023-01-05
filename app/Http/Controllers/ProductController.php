@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
-use App\Models\Cart;
+use App\Models\CartDetail;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
@@ -54,7 +54,7 @@ class ProductController extends Controller
 
         Storage::disk('public')->delete($product->imageUrl);
         $product->delete();
-        $carts = Cart::where('product_id', '=', $id);
+        $carts = CartDetail::where('product_id', '=', $id);
         $carts->delete();
 
         return redirect()->route('home')->with('success','Product deleted successfully!');
